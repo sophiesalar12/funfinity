@@ -8,7 +8,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url("image/landing.jpg"); /* Ensure this path is correct */
+            background-image: url("image/landing.jpg"); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -17,7 +17,7 @@
             overflow-x: hidden;
         }
 
-        /* Dark Overlay to make text pop */
+        /* Dark Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -26,14 +26,13 @@
             z-index: -1;
         }
 
-        /* Modern Glassmorphic Nav */
+        /* Nav */
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 80px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: sticky;
             top: 0;
@@ -58,10 +57,21 @@
         }
 
         .nav-links a:hover {
-            color: #ff4d6d; /* Theme Pink */
+            color: #ff4d6d; 
         }
 
-        /* Hero Content */
+        /* --- HERO TRANSITION ANIMATION --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero {
             height: 80vh;
             display: flex;
@@ -72,19 +82,22 @@
             padding: 0 20px;
         }
 
+        /* Apply animation to Hero elements */
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 10px;
             text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.8s ease forwards; /* Animation starts here */
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 30px;
-            opacity: 0.9;
+            opacity: 0; /* Starts invisible */
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.3s; /* Starts 0.3s after the heading */
         }
 
-        /* Themed Button */
         .btn-main {
             padding: 15px 40px;
             background: #ff4d6d;
@@ -98,6 +111,10 @@
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
             border: none;
             cursor: pointer;
+            
+            opacity: 0; /* Starts invisible */
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.6s; /* Starts last */
         }
 
         .btn-main:hover {
@@ -113,17 +130,12 @@
     <a href="index.php" class="logo">FUNFINITY 🎡</a>
 
     <div class="nav-links">
-        <a href="home.php">Home</a>
-        <a href="#">About</a>
-        <a href="#">Promotions</a>
-        <a href="#">Activities</a>
-
         <?php if(isset($_SESSION['user_id'])): ?>
             <a href="dashboard.php" style="color: #00d1b2;">Dashboard</a>
             <a href="logout.php">Logout</a>
         <?php else: ?>
-            <a href="login.php">Login</a>
-            <a href="signup.php">Register</a>
+            <a href="signup.php">SIGN UP</a>
+            <a href="login.php">LOGIN</a>
         <?php endif; ?>
     </div>
 </div>
